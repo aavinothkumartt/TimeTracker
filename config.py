@@ -23,3 +23,8 @@ ICON_ACTIVE = "▶"  # Icon when session is active
 DATE_FORMAT = "%Y-%m-%d"
 DATETIME_FORMAT = "%Y-%m-%d %H:%M:%S"
 TIME_FORMAT = "%H:%M:%S"
+
+# Web Application Configuration
+ENVIRONMENT = os.getenv("ENVIRONMENT", "development")
+DATABASE_URL = os.getenv("DATABASE_URL")
+SECRET_KEY = os.getenv("SECRET_KEY", "dev-secret-key-change-in-production")

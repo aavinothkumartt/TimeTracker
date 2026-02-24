@@ -13,6 +13,7 @@ class WorkSession:
     end_time: Optional[str] = None
     duration: Optional[int] = None  # in seconds
     task_name: Optional[str] = None
+    project: Optional[str] = None
     notes: Optional[str] = None
     created_at: Optional[str] = None
 
@@ -57,6 +58,7 @@ class ManualEntry:
     date: Optional[str] = None
     duration: int = 0  # in seconds
     task_name: str = ""
+    project: Optional[str] = None
     notes: Optional[str] = None
     created_at: Optional[str] = None
 

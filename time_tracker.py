@@ -28,12 +28,13 @@ class TimeTrackerCore:
         """
         return self.current_session_id is not None
 
-    def start_session(self, task_name=None):
+    def start_session(self, task_name=None, project=None):
         """
         Start a new work session.
 
         Args:
             task_name (str, optional): Name/description of the task
+            project (str, optional): Project/category name
 
         Returns:
             int: Session ID, or None if a session is already active
@@ -41,7 +42,7 @@ class TimeTrackerCore:
         if self.is_session_active():
             return None
 
-        session_id = self.db.create_work_session(task_name)
+        session_id = self.db.create_work_session(task_name, project)
         self.current_session_id = session_id
         return session_id
 
@@ -87,14 +88,16 @@ class TimeTrackerCore:
             return session.calculate_current_duration()
         return 0
 
-    def add_manual_entry(self, task_name, duration_str, notes=None):
+    def add_manual_entry(self, task_name, duration_str, project=None, notes=None, date=None):
         """
         Add a manual time entry.
 
         Args:
             task_name (str): Name/description of the task
             duration_str (str): Duration string (e.g., "2h 30m")
+            project (str, optional): Project/category name
             notes (str, optional): Additional notes
+            date (str, optional): Date of entry (defaults to today)
 
         Returns:
             tuple: (success: bool, message: str, entry_id: int or None)
@@ -112,6 +115,8 @@ class TimeTrackerCore:
         entry_id = self.db.add_manual_entry(
             task_name=task_name.strip(),
             duration=duration,
+            date=date,
+            project=project,
             notes=notes
         )
 
